@@ -85,3 +85,41 @@ module mux8 (input wire [0:7] i, input wire j2, j1, j0, output wire o);
   mux4 mux4_1 (i[4:7], j2, j1, t1);
   mux2 mux2_0 (t0, t1, j0, o);
 endmodule
+
+module demux2 (input wire i, j, output wire o0, o1);
+  assign o0 = (j==0)?i:1'b0;
+  assign o1 = (j==1)?i:1'b0;
+endmodule
+
+module demux4 (input wire i, j1, j0, output wire [0:3] o);
+  wire  t0, t1;
+  demux2 demux2_0 (i, j1, t0, t1);
+  demux2 demux2_1 (t0, j0, o[0], o[1]);
+  demux2 demux2_2 (t1, j0, o[2], o[3]);
+endmodule
+
+module demux8 (input wire i, j2, j1, j0, output wire [0:7] o);
+  wire  t0, t1;
+  demux2 demux2_0 (i, j2, t0, t1);
+  demux4 demux4_0 (t0, j1, j0, o[0:3]);
+  demux4 demux4_1 (t1, j1, j0, o[4:7]);
+endmodule
+
+module df (input wire clk, in, output wire out);
+  reg df_out;
+  always@(posedge clk) df_out <= in;
+  assign out = df_out;
+endmodule
+
+module dfr (input wire clk, reset, in, output wire out);
+  wire reset_, df_in;
+  invert invert_0 (reset, reset_);
+  and2 and2_0 (in, reset_, df_in);
+  df df_0 (clk, df_in, out);
+endmodule
+
+module dfrl (input wire clk, reset, load, in, output wire out);
+  wire _in;
+  mux2 mux2_0(out, in, load, _in);
+  dfr dfr_1(clk, reset, _in, out);
+endmodule

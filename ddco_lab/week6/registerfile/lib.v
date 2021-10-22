@@ -123,3 +123,4 @@ module dfrl (input wire clk, reset, load, in, output wire out);
   mux2 mux2_0(out, in, load, _in);
   dfr dfr_1(clk, reset, _in, out);
 endmodule
+

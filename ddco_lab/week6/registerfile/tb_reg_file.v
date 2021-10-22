@@ -7,7 +7,7 @@ module tb;
   wire [15:0] d_out_a, d_out_b;
   reg [25:0] test_vecs [0:(`TESTVECS-1)];
   integer i;
-  initial begin $dumpfile("tb_reg_file.vcd"); $dumpvars(0,tb); end
+  initial begin $dumpfile("reg_file.vcd"); $dumpvars(0,tb); end
   initial begin reset = 1'b1; #12.5 reset = 1'b0; end
   initial clk = 1'b0; always #5 clk =~ clk;
   initial begin

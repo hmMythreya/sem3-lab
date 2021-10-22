@@ -20,9 +20,9 @@ module tb;
   initial clk = 1'b0; always #5 clk =~ clk;
   initial begin
     test_vecs[0][33:32] = 2'b00; test_vecs[0][31:16] = 16'h0000; test_vecs[0][15:0] = 16'h0000;
-    test_vecs[1][33:32] = 2'b00; test_vecs[1][31:16] = 16'haa55;test_vecs[1][15:0] = 16'h55aa;
-    test_vecs[2][33:32] = 2'b00; test_vecs[2][31:16] = 16'hffff;test_vecs[2][15:0] = 16'h0001;
-    test_vecs[3][33:32] = 2'b00; test_vecs[3][31:16] = 16'h0001;test_vecs[3][15:0] = 16'h7fff;
+    test_vecs[1][33:32] = 2'b00; test_vecs[1][31:16] = 16'ha000;test_vecs[1][15:0] = 16'h0012;
+    test_vecs[2][33:32] = 2'b00; test_vecs[2][31:16] = 16'hf001;test_vecs[2][15:0] = 16'h0001;
+    test_vecs[3][33:32] = 2'b00; test_vecs[3][31:16] = 16'h0001;test_vecs[3][15:0] = 16'h7210;
     test_vecs[4][33:32] = 2'b01; test_vecs[4][31:16] = 16'h0000;test_vecs[4][15:0] = 16'h0000;
     test_vecs[5][33:32] = 2'b01; test_vecs[5][31:16] = 16'haa55;test_vecs[5][15:0] = 16'h55aa;
     test_vecs[6][33:32] = 2'b01; test_vecs[6][31:16] = 16'hffff;test_vecs[6][15:0] = 16'h0001;
@@ -46,7 +46,7 @@ module tb;
  
  end
 
-always@(i0 or i1 )
+always@(i0 or i1)
 $monitor("At time = %t, Operator= %b,i0=%h, i1=%h,Sum = %h,Carry %h", $time,op,i0,i1,o,cout);
 
 
